@@ -1,0 +1,22 @@
+{
+  "messageName": "m_StartNewEnrolment",
+  "tenantId": "MI13",
+  "processVariables": {
+	"timestamp": { "value": "{{1.columnzeitstempel}}", "type": "string" },
+	"email": { "value": "{{1.`columne-mail-adresse`}}", "type": "string" },
+    "firstName": { "value": "{{1.columnfirstname}}", "type": "string" },
+	"lastName": { "value": "{{1.columnlastname}}", "type": "string" },
+	"dateOfBirth": { "value": "{{1.columndateofbirth}}", "type": "string" },
+	"street": { "value": "{{1.`columnstreeetincl.number`}}", "type": "string" },
+	"zipCode": { "value": "{{1.columnzipcode}}", "type": "string" },
+	"state": { "value": "{{1.columnstate}}", "type": "string" },
+	"country": { "value": "{{1.columncountry}}", "type": "string" },
+	"nationality": { "value": "{{1.columnnationality}}", "type": "string" },
+	"startTime": { "value": "{{1.columnstarttime}}", "type": "string" },
+	"mode": { "value": "{{1.columnmode}}", "type": "string" },
+	"cv": { "value": "{{1.columncv}}", "type": "string" },
+	"bachelorsDegree": { "value": "{{1.columnbachelorsdegreeorsimilar}}", "type": "string" },
+	"englishProficiency": { "value": "{{1.columnenglishproficiencytofelorsimilar}}", "type": "string" },
+	"otherDiplomas": { "value": "{{1.columnotherdiplomasorcertificates}}", "type": "string" }
+  }
+}
