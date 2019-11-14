@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0mwdp25" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.4">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0mwdp25" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.4">
   <decision id="Decision_15dzje2" name="Qualification Decision">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
     <decisionTable id="decisionTable_1">
       <input id="input_1" label="Bachelor degree">
         <inputExpression id="inputExpression_1" typeRef="boolean" expressionLanguage="JavaScript">
-          <text>bachelorDegree</text>
+          <text>bachelorsDegreeFulfilled</text>
         </inputExpression>
       </input>
       <input id="InputClause_0fz2dwy" label="Grade">
@@ -14,20 +17,15 @@
       </input>
       <input id="InputClause_0vsu2bd" label="English level (TOFEL)">
         <inputExpression id="LiteralExpression_0fgyl46" typeRef="double" expressionLanguage="JavaScript">
-          <text>englishLevel</text>
+          <text>englishTofelScore</text>
         </inputExpression>
       </input>
       <input id="InputClause_1732j5i" label="Professional experience">
         <inputExpression id="LiteralExpression_1bujkek" typeRef="boolean" expressionLanguage="JavaScript">
-          <text>professionalExperience</text>
+          <text>professionalExperienceFulfilled</text>
         </inputExpression>
       </input>
-      <input id="InputClause_1l0wtg3">
-        <inputExpression id="LiteralExpression_14f84g0" typeRef="string">
-          <text></text>
-        </inputExpression>
-      </input>
-      <output id="output_1" label="Qualification fullfiled" name="qualificationFullfiled" typeRef="string" />
+      <output id="output_1" label="Qualification fullfiled" name="qualificationResult" typeRef="string" />
       <rule id="DecisionRule_1bdlebb">
         <inputEntry id="UnaryTests_09t8xpg">
           <text>true</text>
@@ -40,9 +38,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0n5sm17">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1gmle0p">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ij5nca">
           <text>"fullyFulfilled"</text>
@@ -61,9 +56,6 @@
         <inputEntry id="UnaryTests_0g9v0wg">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0ygt58c">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_027ka12">
           <text>"fullyFulfilled"</text>
         </outputEntry>
@@ -80,9 +72,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1e957rw">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0bp75x7">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1fzvkwh">
           <text>"notFulfilled"</text>
@@ -101,9 +90,6 @@
         <inputEntry id="UnaryTests_1k8213a">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_1pj4f5w">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_0znfh0z">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -120,9 +106,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_04co9rb">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0x2lbh7">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_11f11k9">
           <text>"partiallyFulfilled"</text>
@@ -141,9 +124,6 @@
         <inputEntry id="UnaryTests_0mrc4ay">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0hyxsfc">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_0lnnqpy">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -160,9 +140,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0s5daxp">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0roi3gu">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xexaeh">
           <text>"notFulfilled"</text>
@@ -181,9 +158,6 @@
         <inputEntry id="UnaryTests_1cvrg31">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0dqjdru">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_052erlp">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -200,9 +174,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0f3ky8c">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0cq7evz">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1jlg94n">
           <text>"notFulfilled"</text>
@@ -221,9 +192,6 @@
         <inputEntry id="UnaryTests_1q376q3">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_14uexfc">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_15sn39t">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -240,9 +208,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1c7qiyp">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0paf3rc">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0vnupd6">
           <text>"notFulfilled"</text>
@@ -261,9 +226,6 @@
         <inputEntry id="UnaryTests_1lmahnq">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_1jrkc1h">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_19jivxq">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -280,9 +242,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1tlcarr">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0cmt53b">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1u8x9h4">
           <text>"notFulfilled"</text>
@@ -301,9 +260,6 @@
         <inputEntry id="UnaryTests_1sryf3n">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_1fqt0wm">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_0t36dt7">
           <text>"notFulfilled"</text>
         </outputEntry>
@@ -320,9 +276,6 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0h1c9it">
           <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1c71q68">
-          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_06e7sut">
           <text>"notFulfilled"</text>
@@ -341,31 +294,8 @@
         <inputEntry id="UnaryTests_1gm9vwb">
           <text>false</text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0nrl663">
-          <text></text>
-        </inputEntry>
         <outputEntry id="LiteralExpression_1gvr7io">
           <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1ul745y">
-        <inputEntry id="UnaryTests_1sysjkj">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1qwdxqd">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0u3tuaf">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1q8sh9n">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0vndxnr">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0jk3aj5">
-          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
