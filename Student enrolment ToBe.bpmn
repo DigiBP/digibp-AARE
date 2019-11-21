@@ -5,7 +5,7 @@
   <bpmn:message id="Message_06ur9l3" name="m_WaitForAppointmentScheduled" />
   <bpmn:message id="Message_04pugsi" />
   <bpmn:message id="Message_0vqrg64" name="m_WaitForInterviewScores" />
-  <bpmn:collaboration id="Collaboration_0kytygb">
+  <bpmn:collaboration id="Student_Enrolment_ToBe">
     <bpmn:participant id="Participant_0zuz1nl" name="School" processRef="Student_Enrolment" />
     <bpmn:participant id="Participant_0b4yct4" name="Student" />
     <bpmn:messageFlow id="MessageFlow_0uriq60" sourceRef="Participant_0b4yct4" targetRef="se_StartEnrolment" />
@@ -327,7 +327,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
     <bpmn:sequenceFlow id="SequenceFlow_1yniekj" sourceRef="t_SendAcceptance" targetRef="EndEvent_0dvizd2" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0kytygb">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Student_Enrolment_ToBe">
       <bpmndi:BPMNShape id="Participant_0zuz1nl_di" bpmnElement="Participant_0zuz1nl" isHorizontal="true">
         <dc:Bounds x="120" y="200" width="1470" height="980" />
       </bpmndi:BPMNShape>
@@ -443,7 +443,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="502" y="710" />
         <di:waypoint x="1237" y="710" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="562" y="683" width="55" height="14" />
+          <dc:Bounds x="539" y="691" width="55" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1tx0zv8_di" bpmnElement="SequenceFlow_1tx0zv8">
@@ -451,7 +451,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="477" y="837" />
         <di:waypoint x="592" y="837" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="491" y="827" width="77" height="14" />
+          <dc:Bounds x="491" y="818" width="77" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1rpbvlg_di" bpmnElement="SequenceFlow_1rpbvlg">
@@ -459,7 +459,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="477" y="951" />
         <di:waypoint x="1337" y="951" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="489" y="937" width="61" height="14" />
+          <dc:Bounds x="502" y="932" width="61" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1nfa3zh_di" bpmnElement="SequenceFlow_1nfa3zh">
