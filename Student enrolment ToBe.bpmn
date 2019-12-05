@@ -44,7 +44,7 @@
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="SequenceFlow_1r20yua" name="Yes" sourceRef="g_" targetRef="t_qualificationDecision">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englishTofelScore &gt; 0 &amp;&amp; grade &gt; 0}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englishTofelScore &gt; 0.0 &amp;&amp; grade &gt; 0.0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0fo2xfp" sourceRef="sb_ProcessDocumentsWithAIServices" targetRef="g_" />
     <bpmn:sequenceFlow id="SequenceFlow_1yniekj" sourceRef="t_SendAcceptance" targetRef="ee_EnrolmentCompleted" />
@@ -81,7 +81,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0s6wpir" sourceRef="se_StartEnrolment" targetRef="t_checkContent" />
     <bpmn:sequenceFlow id="SequenceFlow_1grnz2e" sourceRef="t_refreshApplicationData" targetRef="t_checkContent" />
     <bpmn:sequenceFlow id="SequenceFlow_0dt17f8" name="No" sourceRef="g_" targetRef="t_PrepareDecisionData">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englishTofelScore == 0 || grade == 0}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englishTofelScore == 0.0 || grade == 0.0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:subProcess id="sb_ProcessDocumentsWithAIServices" name="Extract decision data from documents (AI services)">
       <bpmn:incoming>SequenceFlow_0mf0bc6</bpmn:incoming>
@@ -219,22 +219,6 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
       <bpmn:outgoing>SequenceFlow_0s6wpir</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1bhdo64" messageRef="Message_0edlnkw" />
     </bpmn:startEvent>
-    <bpmn:userTask id="t_PrepareDecisionData" name="Prepare decision data qualification decision">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="cv" label="CV" type="string" />
-          <camunda:formField id="bachelorsDegree" label="Bachelor&#39;s degree or similar" type="string" />
-          <camunda:formField id="englishProficiency" label="English proficiency (TOFEL) or similar" type="string" />
-          <camunda:formField id="otherDiplomas" label="Other diplomas" type="string" />
-          <camunda:formField id="professionalExperienceFulfilled" label="Professional experience fulfilled?" type="boolean" />
-          <camunda:formField id="bachelorsDegreeFulfilled" label="Bachelor&#39;s degree fulfilled?" type="boolean" />
-          <camunda:formField id="grade" label="Grade" type="string" />
-          <camunda:formField id="englishTofelScore" label="English TOFEL score" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0dt17f8</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1ivmajv</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:userTask id="t_checkContent" name="Check content of documents">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -276,8 +260,8 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
     "to":email,
-    "subject":"Student enrolment accepted",
-    "message":"Congratulations! Your application was accepted."
+    "subject":"Your application for admission at our University",
+    "message":"Dear " + firstName + " " + lastName + ",\n\nCongratulations! We are pleased to inform you of your admission to our University. You will soon be receiving your official letter of admission to the University. Your letter will advise you of important information pertaining to the status of your admission.\n\nBest regards,\n\nAdmission Office"
 });</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -321,8 +305,8 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
     "to":email,
-    "subject":"Invitation for interview appointment",
-    "message":"https://app.acuityscheduling.com/schedule.php?owner=18549485&amp;notembedded=1"
+    "subject":"Invitation to interview",
+    "message":"Dear " + firstName + " " + lastName + ",\n\nThank you for choosing our University.\n\nAs a result of your application for admission to our University, we would like to invite you to an interview.\n\nPlease follow the link below to choose the date and time that suits you best.\n\nhttps://app.acuityscheduling.com/schedule.php?owner=18549485&amp;notembedded=1 \n\nBest regards,\n\nAdmission Office"
 });</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -350,8 +334,8 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
     "to":email,
-    "subject":"Student enrolment rejected",
-    "message":"We are sorry to inform you, that your application was rejected."
+    "subject":"You application for admission at our University",
+    "message":"Dear " + firstName + " " + lastName + ",\n\nThank you for choosing our University.\n\nAfter careful consideration of your application, we regret to inform you that we are not able to offer you admission at our University.\n\nWe wish you all the best in your future endeavors.\n\nBest regards,\n\nAdmission Office"
 });</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -477,6 +461,22 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
       <bpmn:outgoing>SequenceFlow_1qvm0kn</bpmn:outgoing>
       <bpmn:script>interviewScore = (1.5 * motivationScore) + (1.5 * knowledgeScore) + englishScore + potentialScore</bpmn:script>
     </bpmn:scriptTask>
+    <bpmn:userTask id="t_PrepareDecisionData" name="Prepare decision data qualification decision">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="cv" label="CV" type="string" />
+          <camunda:formField id="bachelorsDegree" label="Bachelor&#39;s degree or similar" type="string" />
+          <camunda:formField id="englishProficiency" label="English proficiency (TOFEL) or similar" type="string" />
+          <camunda:formField id="otherDiplomas" label="Other diplomas" type="string" />
+          <camunda:formField id="professionalExperienceFulfilled" label="Professional experience fulfilled?" type="boolean" />
+          <camunda:formField id="bachelorsDegreeFulfilled" label="Bachelor&#39;s degree fulfilled?" type="boolean" />
+          <camunda:formField id="grade" label="Grade" type="string" />
+          <camunda:formField id="englishTofelScore" label="English TOFEL score" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0dt17f8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ivmajv</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Student_Enrolment_ToBe">
@@ -502,7 +502,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <dc:Bounds x="507" y="366" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_01dxq3s_di" bpmnElement="t_PrepareDecisionData">
-        <dc:Bounds x="520" y="526" width="100" height="80" />
+        <dc:Bounds x="520" y="518" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BusinessRuleTask_15xx1t8_di" bpmnElement="t_qualificationDecision">
         <dc:Bounds x="520" y="670" width="100" height="80" />
@@ -724,7 +724,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="522" y="600" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ivmajv_di" bpmnElement="SequenceFlow_1ivmajv">
-        <di:waypoint x="570" y="606" />
+        <di:waypoint x="570" y="598" />
         <di:waypoint x="570" y="670" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0o22pt1_di" bpmnElement="EndEvent_0o22pt1">
@@ -746,8 +746,8 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0dt17f8_di" bpmnElement="SequenceFlow_0dt17f8">
         <di:waypoint x="492" y="782" />
-        <di:waypoint x="492" y="566" />
-        <di:waypoint x="520" y="566" />
+        <di:waypoint x="492" y="558" />
+        <di:waypoint x="520" y="558" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="472" y="750" width="15" height="14" />
         </bpmndi:BPMNLabel>
