@@ -37,26 +37,9 @@
           <text>&gt;=6.5</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0n5sm17">
-          <text>true</text>
+          <text>-</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0ij5nca">
-          <text>"fullyFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0tw6un5">
-        <inputEntry id="UnaryTests_0pcm9um">
-          <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1413qks">
-          <text>&gt;=4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ttu44y">
-          <text>&gt;=6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0g9v0wg">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_027ka12">
           <text>"fullyFulfilled"</text>
         </outputEntry>
       </rule>
@@ -71,26 +54,9 @@
           <text>&lt;6.5</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1e957rw">
-          <text>true</text>
+          <text>-</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1fzvkwh">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_04n1490">
-        <inputEntry id="UnaryTests_07totae">
-          <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_07dqyo0">
-          <text>&gt;=4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1k79tbu">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1k8213a">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0znfh0z">
           <text>"notFulfilled"</text>
         </outputEntry>
       </rule>
@@ -139,26 +105,9 @@
           <text>&lt;6.5</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0s5daxp">
-          <text>true</text>
+          <text>-</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xexaeh">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0vlxs9n">
-        <inputEntry id="UnaryTests_0gn83z8">
-          <text>true</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_001f88l">
-          <text>&lt;4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1bsymqf">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1cvrg31">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_052erlp">
           <text>"notFulfilled"</text>
         </outputEntry>
       </rule>
@@ -167,134 +116,15 @@
           <text>false</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0y6isx9">
-          <text>&gt;=4.8</text>
+          <text>-</text>
         </inputEntry>
         <inputEntry id="UnaryTests_12bah5m">
-          <text>&gt;=6.5</text>
+          <text>-</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0f3ky8c">
-          <text>true</text>
+          <text>-</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1jlg94n">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1ei7vub">
-        <inputEntry id="UnaryTests_1v1lg0a">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1g9dmtx">
-          <text>&gt;=4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_09tioku">
-          <text>&gt;=6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1q376q3">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_15sn39t">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0vhyh1v">
-        <inputEntry id="UnaryTests_0x4uh8w">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0igp2tt">
-          <text>&gt;=4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0wfiois">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1c7qiyp">
-          <text>true</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0vnupd6">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1iirpai">
-        <inputEntry id="UnaryTests_00bd38q">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_01husqg">
-          <text>&gt;=4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0jlhjxo">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1lmahnq">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_19jivxq">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_01ajeiv">
-        <inputEntry id="UnaryTests_1gw1ehc">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0bz5vxo">
-          <text>&lt;4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_07wooui">
-          <text>&gt;=6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1tlcarr">
-          <text>true</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1u8x9h4">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1sllprm">
-        <inputEntry id="UnaryTests_0a9i5jb">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1tgnpzn">
-          <text>&lt;4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0f3t6zl">
-          <text>&gt;=6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1sryf3n">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0t36dt7">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_1rf8pcy">
-        <inputEntry id="UnaryTests_0w8epr4">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0w57pt3">
-          <text>&lt;4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1m50pdx">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0h1c9it">
-          <text>true</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_06e7sut">
-          <text>"notFulfilled"</text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_18hxfet">
-        <inputEntry id="UnaryTests_0dlj66k">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0jdk9mc">
-          <text>&lt;4.8</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1proapa">
-          <text>&lt;6.5</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1gm9vwb">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1gvr7io">
           <text>"notFulfilled"</text>
         </outputEntry>
       </rule>
