@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0m2cl1w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.4">
   <bpmn:message id="Message_0edlnkw" name="m_StartNewEnrolment" />
-  <bpmn:message id="Message_1xfoeix" name="m_WaitForUpdateOfApplication" />
+  <bpmn:message id="Message_1xfoeix" />
   <bpmn:message id="Message_06ur9l3" name="m_WaitForAppointmentScheduled" />
   <bpmn:message id="Message_04pugsi" />
   <bpmn:message id="Message_0vqrg64" name="m_WaitForInterviewScores" />
@@ -13,30 +13,32 @@
     <bpmn:messageFlow id="MessageFlow_0dbz98k" sourceRef="t_SendRejection" targetRef="Participant_0b4yct4" />
     <bpmn:messageFlow id="MessageFlow_0iuw506" sourceRef="t_SendAcceptance" targetRef="Participant_0b4yct4" />
     <bpmn:messageFlow id="MessageFlow_05p1bef" sourceRef="Participant_0b4yct4" targetRef="e_ReceiveAppointment" />
+    <bpmn:messageFlow id="MessageFlow_0jaksvi" sourceRef="t_requestMissingData" targetRef="Participant_0b4yct4" />
+    <bpmn:messageFlow id="MessageFlow_0d01vu1" sourceRef="Participant_0b4yct4" targetRef="t_requestMissingData" />
   </bpmn:collaboration>
   <bpmn:process id="Student_Enrolment" name="Student Enrolment" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1pf1uvn">
       <bpmn:lane id="Lane_1i1cwdb" name="Admission office">
-        <bpmn:flowNodeRef>g_applicationComplete</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_refreshApplicationData</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_checkContent</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>se_StartEnrolment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_checkContent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g_applicationComplete</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_requestMissingData</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1fi1ih2" name="Study Assistant">
         <bpmn:flowNodeRef>t_PrepareDecisionData</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0u0owqv" name="System">
-        <bpmn:flowNodeRef>t_qualificationDecision</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>g_qualificationResult</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_SendRejection</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_ScheduleInterview</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>e_ReceiveAppointment</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>g_interviewResult</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>e_ReceiveInterviewScores</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ee_EnrolmentCompleted</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_SendAcceptance</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>g_</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>sb_ProcessDocumentsWithAIServices</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g_</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_SendAcceptance</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ee_EnrolmentCompleted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e_ReceiveInterviewScores</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g_interviewResult</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e_ReceiveAppointment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_ScheduleInterview</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_SendRejection</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g_qualificationResult</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_qualificationDecision</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_CalculateOverallInterviewScore</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1371mr4" name="Interview team">
@@ -72,14 +74,14 @@
     <bpmn:sequenceFlow id="SequenceFlow_1nfa3zh" sourceRef="t_qualificationDecision" targetRef="g_qualificationResult" />
     <bpmn:sequenceFlow id="SequenceFlow_1ivmajv" sourceRef="t_PrepareDecisionData" targetRef="t_qualificationDecision" />
     <bpmn:sequenceFlow id="SequenceFlow_118uf60" sourceRef="t_checkContent" targetRef="g_applicationComplete" />
-    <bpmn:sequenceFlow id="SequenceFlow_0y80us0" name="No" sourceRef="g_applicationComplete" targetRef="t_refreshApplicationData">
+    <bpmn:sequenceFlow id="SequenceFlow_0y80us0" name="No" sourceRef="g_applicationComplete" targetRef="t_requestMissingData">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!complete || !paymentReceived}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0mf0bc6" name="Yes" sourceRef="g_applicationComplete" targetRef="sb_ProcessDocumentsWithAIServices">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${complete &amp;&amp; paymentReceived}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0s6wpir" sourceRef="se_StartEnrolment" targetRef="t_checkContent" />
-    <bpmn:sequenceFlow id="SequenceFlow_1grnz2e" sourceRef="t_refreshApplicationData" targetRef="t_checkContent" />
+    <bpmn:sequenceFlow id="SequenceFlow_1grnz2e" sourceRef="t_requestMissingData" targetRef="t_checkContent" />
     <bpmn:sequenceFlow id="SequenceFlow_0dt17f8" name="No" sourceRef="g_" targetRef="t_PrepareDecisionData">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englishTofelScore == 0.0 || grade == 0.0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -240,6 +242,7 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
           <camunda:formField id="otherDiplomas" label="Other diplomas" type="string" />
           <camunda:formField id="complete" label="Complete?" type="boolean" />
           <camunda:formField id="paymentReceived" label="Payment received?" type="boolean" />
+          <camunda:formField id="missingDocuments" label="What documents are missing?" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0s6wpir</bpmn:incoming>
@@ -367,90 +370,6 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
       <bpmn:incoming>SequenceFlow_1r20yua</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1nfa3zh</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:serviceTask id="t_refreshApplicationData" name="Request missing data">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="url">https://hook.integromat.com/jmpc4e0qp54enpo1nigo9m45fsil5y8o</camunda:inputParameter>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-                <camunda:entry key="Accept">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-    "email":email
-});</camunda:script>
-            </camunda:inputParameter>
-            <camunda:outputParameter name="firstName">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-firstName=object.firstName;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="lastName">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-lastName=object.lastName;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="timestamp">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-timestamp=object.timestamp;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="dateOfBirth">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-dateOfBirth=object.dateOfBirth;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="street">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-street=object.street;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="zipCode">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-zipCode=object.zipCode;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="state">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-state=object.state;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="country">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-country=object.country;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="nationality">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-nationality=object.nationality;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="startTime">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-startTime=object.startTime;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="mode">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-mode=object.mode;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="cv">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-cv=object.cv;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="bachelorsDegree">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-bachelorsDegree=object.bachelorsDegree;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="englishProficiency">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-englishProficiency=object.englishProficiency;</camunda:script>
-            </camunda:outputParameter>
-            <camunda:outputParameter name="otherDiplomas">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-otherDiplomas=object.otherDiplomas;</camunda:script>
-            </camunda:outputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0y80us0</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1grnz2e</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="g_applicationComplete" name="Complete?">
       <bpmn:incoming>SequenceFlow_118uf60</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0y80us0</bpmn:outgoing>
@@ -477,11 +396,55 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
       <bpmn:incoming>SequenceFlow_0dt17f8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ivmajv</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:subProcess id="t_requestMissingData" name="Request missing data">
+      <bpmn:incoming>SequenceFlow_0y80us0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1grnz2e</bpmn:outgoing>
+      <bpmn:startEvent id="StartEvent_1pj1o50">
+        <bpmn:outgoing>SequenceFlow_0c687m1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_0c687m1" sourceRef="StartEvent_1pj1o50" targetRef="t_sendMailForMissingDocuments" />
+      <bpmn:sequenceFlow id="SequenceFlow_0wq8d8m" sourceRef="t_sendMailForMissingDocuments" targetRef="e_ReceiveUpdateNotification" />
+      <bpmn:intermediateCatchEvent id="e_ReceiveUpdateNotification" name="Receive update notification">
+        <bpmn:incoming>SequenceFlow_0wq8d8m</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_17yj3rt</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_1dg5zjv" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:endEvent id="EndEvent_0poy54y">
+        <bpmn:incoming>SequenceFlow_17yj3rt</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_17yj3rt" sourceRef="e_ReceiveUpdateNotification" targetRef="EndEvent_0poy54y" />
+      <bpmn:serviceTask id="t_sendMailForMissingDocuments" name="Send mail to request missing documents">
+        <bpmn:extensionElements>
+          <camunda:connector>
+            <camunda:inputOutput>
+              <camunda:inputParameter name="url">https://hook.integromat.com/ssaytnd5j97dvierpldb33q1hx2ygai9</camunda:inputParameter>
+              <camunda:inputParameter name="method">POST</camunda:inputParameter>
+              <camunda:inputParameter name="headers">
+                <camunda:map>
+                  <camunda:entry key="Content-Type">application/json</camunda:entry>
+                </camunda:map>
+              </camunda:inputParameter>
+              <camunda:inputParameter name="payload">
+                <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+    "to":email,
+    "subject":"Missing document/s",
+    "message":"Dear " + firstName + " " + lastName + ",\n\nThank you for choosing our University.\n\nWe are unable to process your application because the following document/s is/are missing:\n\n" + missingDocuments + "\n\nPlease submit the missing document/s and confirm by email before the application deadline expires.\n\nBest regards,\n\nAdmission Office"
+});</camunda:script>
+              </camunda:inputParameter>
+            </camunda:inputOutput>
+            <camunda:connectorId>http-connector</camunda:connectorId>
+          </camunda:connector>
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_0c687m1</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_0wq8d8m</bpmn:outgoing>
+      </bpmn:serviceTask>
+    </bpmn:subProcess>
   </bpmn:process>
+  <bpmn:message id="Message_1dg5zjv" name="m_WaitForUpdateNotification" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Student_Enrolment_ToBe">
       <bpmndi:BPMNShape id="Participant_0zuz1nl_di" bpmnElement="Participant_0zuz1nl" isHorizontal="true">
-        <dc:Bounds x="160" y="200" width="1670" height="980" />
+        <dc:Bounds x="160" y="230" width="1670" height="950" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0o1pl1j_di" bpmnElement="g_applicationComplete" isMarkerVisible="true">
         <dc:Bounds x="385" y="381" width="50" height="50" />
@@ -497,9 +460,6 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <bpmndi:BPMNLabel>
           <dc:Bounds x="262" y="321" width="54" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1hzxg9e_di" bpmnElement="t_refreshApplicationData">
-        <dc:Bounds x="507" y="366" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_01dxq3s_di" bpmnElement="t_PrepareDecisionData">
         <dc:Bounds x="520" y="518" width="100" height="80" />
@@ -617,15 +577,15 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="410" y="381" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1grnz2e_di" bpmnElement="SequenceFlow_1grnz2e">
-        <di:waypoint x="557" y="366" />
-        <di:waypoint x="557" y="296" />
+        <di:waypoint x="520" y="296" />
         <di:waypoint x="460" y="296" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0y80us0_di" bpmnElement="SequenceFlow_0y80us0">
         <di:waypoint x="435" y="406" />
-        <di:waypoint x="507" y="406" />
+        <di:waypoint x="570" y="406" />
+        <di:waypoint x="570" y="336" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="451" y="388" width="15" height="14" />
+          <dc:Bounds x="482" y="383" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0s6wpir_di" bpmnElement="SequenceFlow_0s6wpir">
@@ -643,7 +603,7 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
         <di:waypoint x="1686" y="855" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_1i1cwdb_di" bpmnElement="Lane_1i1cwdb" isHorizontal="true">
-        <dc:Bounds x="190" y="200" width="1640" height="280" />
+        <dc:Bounds x="190" y="230" width="1640" height="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1fi1ih2_di" bpmnElement="Lane_1fi1ih2" isHorizontal="true">
         <dc:Bounds x="190" y="480" width="1640" height="150" />
@@ -780,6 +740,44 @@ otherDiplomas=object.otherDiplomas;</camunda:script>
       <bpmndi:BPMNEdge id="MessageFlow_05p1bef_di" bpmnElement="MessageFlow_05p1bef">
         <di:waypoint x="972" y="140" />
         <di:waypoint x="972" y="819" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SubProcess_1h748rg_di" bpmnElement="t_requestMissingData" isExpanded="false">
+        <dc:Bounds x="520" y="256" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1pj1o50_di" bpmnElement="StartEvent_1pj1o50">
+        <dc:Bounds x="384.33333333333326" y="269" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0c687m1_di" bpmnElement="SequenceFlow_0c687m1">
+        <di:waypoint x="420" y="287" />
+        <di:waypoint x="472" y="287" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wq8d8m_di" bpmnElement="SequenceFlow_0wq8d8m">
+        <di:waypoint x="572" y="287" />
+        <di:waypoint x="624" y="287" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_02lcehg_di" bpmnElement="e_ReceiveUpdateNotification">
+        <dc:Bounds x="624" y="269" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="604" y="312" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0poy54y_di" bpmnElement="EndEvent_0poy54y">
+        <dc:Bounds x="714" y="269" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17yj3rt_di" bpmnElement="SequenceFlow_17yj3rt">
+        <di:waypoint x="660" y="287" />
+        <di:waypoint x="714" y="287" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0md34we_di" bpmnElement="t_sendMailForMissingDocuments">
+        <dc:Bounds x="472" y="247" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_0jaksvi_di" bpmnElement="MessageFlow_0jaksvi">
+        <di:waypoint x="560" y="256" />
+        <di:waypoint x="560" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_0d01vu1_di" bpmnElement="MessageFlow_0d01vu1">
+        <di:waypoint x="580" y="140" />
+        <di:waypoint x="580" y="256" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
