@@ -24,7 +24,7 @@
         <bpmn:flowNodeRef>g_applicationComplete</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_requestMissingData</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_1fi1ih2" name="Study Assistant">
+      <bpmn:lane id="Lane_1fi1ih2" name="Study assistant">
         <bpmn:flowNodeRef>t_PrepareDecisionData</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0u0owqv" name="System">
@@ -221,7 +221,7 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
       <bpmn:outgoing>SequenceFlow_0s6wpir</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1bhdo64" messageRef="Message_0edlnkw" />
     </bpmn:startEvent>
-    <bpmn:userTask id="t_checkContent" name="Check content of documents">
+    <bpmn:userTask id="t_checkContent" name="Check content of documents" camunda:assignee="office">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="firstName" label="First Name" type="string" />
@@ -380,7 +380,7 @@ professionalExperienceFulfilled=object.professionalExperienceFulfilled;</camunda
       <bpmn:outgoing>SequenceFlow_1qvm0kn</bpmn:outgoing>
       <bpmn:script>interviewScore = (1.5 * motivationScore) + (1.5 * knowledgeScore) + englishScore + potentialScore</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:userTask id="t_PrepareDecisionData" name="Prepare decision data qualification decision">
+    <bpmn:userTask id="t_PrepareDecisionData" name="Prepare decision data qualification decision" camunda:assignee="assistant">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="cv" label="CV" type="string" />
