@@ -1,9 +1,9 @@
-# Student enrollment process
+# Student Enrolment Process
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-Heroku-6762a6.svg?longCache=true)](https://heroku.com/deploy)
 
-This process describes the enrollment of a new graduate student at a university. The process is started by the student filling out an application after which it will be checked. If qualification needs are fulfilled the registration fees are collected and then the student becomes accepted.
+In addition to being a complex and tedious manual task, a university admission process usually requires more resources, long time to process documents and notify the applicants. By introducing an AI system to the admission process, our design enhances the processing speed of application documents and reduces the workloads on admission offices. 
 
 ## Team AARE members
 
